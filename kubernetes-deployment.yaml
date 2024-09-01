@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-server
+  template:
+    metadata:
+      labels:
+        app: demo-server
+    spec:
+      containers:
+      - name: demo-server
+        image: gcr.io/fiery-webbing-434004-g6/demo_server_image:latest
+        ports:
+        - containerPort: 50051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-server-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: demo-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 50051

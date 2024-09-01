@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--platform=linux/amd64', '-t', 'gcr.io/fiery-webbing-434004-g6/demo_server_image:latest', '.']
+    id: 'build'
+    volumes:
+      - name: 'cache'
+        path: '/cache'
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/fiery-webbing-434004-g6/demo_server_image:latest']
+    volumes:
+      - name: 'cache'
+        path: '/cache'
+images:
+  - 'gcr.io/fiery-webbing-434004-g6/demo_server_image:latest'
