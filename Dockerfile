@@ -26,9 +26,6 @@ WORKDIR /app
 # Copy the project files into the container
 COPY . /app
 
-RUN echo "Debug: Listing contents of /app" && ls -a /app && echo "Debug: Finished listing /app"
-
-
 # Run CMake to configure the build
 RUN mkdir -p build && cd build && cmake .. && cmake --build .
 
